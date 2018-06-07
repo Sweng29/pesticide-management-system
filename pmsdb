@@ -1,0 +1,409 @@
+/*
+SQLyog Ultimate v11.33 (64 bit)
+MySQL - 5.0.27-community-nt : Database - pmsdb
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`pmsdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `pmsdb`;
+
+/*Table structure for table `commision` */
+
+DROP TABLE IF EXISTS `commision`;
+
+CREATE TABLE `commision` (
+  `commision_id` int(11) NOT NULL auto_increment,
+  `commision_type` varchar(255) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(4) default NULL,
+  PRIMARY KEY  (`commision_id`),
+  KEY `created_by` (`created_by`),
+  KEY `modified_by` (`modified_by`),
+  CONSTRAINT `commision_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `commision_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `commision` */
+
+insert  into `commision`(`commision_id`,`commision_type`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (1,'yearly',NULL,'2017-06-03 21:00:58',NULL,'2017-06-03 21:01:07',1),(2,'monthly',NULL,'2017-06-07 00:17:49',NULL,'2017-06-07 00:17:53',1),(3,'six months',NULL,'2017-06-07 00:17:59',NULL,'2017-06-07 00:18:02',1),(4,'quarter months',NULL,'2017-06-07 00:18:13',NULL,'2017-06-07 00:18:16',1);
+
+/*Table structure for table `company` */
+
+DROP TABLE IF EXISTS `company`;
+
+CREATE TABLE `company` (
+  `company_id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `Address` varchar(255) default NULL,
+  `contact` varchar(255) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(4) default NULL,
+  PRIMARY KEY  (`company_id`),
+  KEY `created_by` (`created_by`),
+  KEY `modified_by` (`modified_by`),
+  CONSTRAINT `company_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `company_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `company` */
+
+insert  into `company`(`company_id`,`name`,`Address`,`contact`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (1,'ABC','Latifabad','+92546-5444464',3,'2017-06-07 00:19:14',3,'2017-06-07 00:19:19',1),(2,'FFC','Ali Palace','+92654-6454564',8,'2017-06-07 00:21:55',3,'2017-06-17 18:51:04',1),(3,'XYZ','Civil Lines','+92545-4454464',3,'2017-06-16 01:13:52',3,'2017-06-17 18:51:31',1),(4,'Gansha','Saddar','+92444-5445445',3,'2017-06-17 17:43:50',3,'2017-06-19 17:05:32',1),(5,'Tahir Ali','Tando adam','+92654-4546546',3,'2017-06-19 17:17:44',3,'2017-06-19 17:17:44',1);
+
+/*Table structure for table `customer` */
+
+DROP TABLE IF EXISTS `customer`;
+
+CREATE TABLE `customer` (
+  `customer_id` int(11) NOT NULL auto_increment,
+  `type` enum('Customer','Dealer') default NULL,
+  `name` varchar(255) default NULL,
+  `contact` varchar(255) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(4) default NULL,
+  PRIMARY KEY  (`customer_id`),
+  KEY `created_by` (`created_by`),
+  KEY `modified_by` (`modified_by`),
+  CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `customer_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `customer` */
+
+insert  into `customer`(`customer_id`,`type`,`name`,`contact`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (1,'Customer','asif','1111431',3,'2017-06-04 01:38:12',3,'2017-06-20 14:06:02',0),(7,'Dealer','asif','+92-3342154707',3,'2017-06-20 15:09:24',3,'2017-06-21 05:26:03',1),(8,'Dealer','Rehan','+92454-6464646',3,'2017-06-21 23:33:02',3,'2017-06-21 23:33:02',1),(9,'Customer','Rehan','+92878-7779797',3,'2017-06-22 01:24:19',3,'2017-06-22 01:24:19',1),(10,'Customer','Tahir','+92878-7779797',3,'2017-06-22 01:24:55',3,'2017-06-22 01:24:55',1),(11,'Customer','Sadaquat','+92878-7779797',3,'2017-06-22 01:25:10',3,'2017-06-22 01:25:10',1),(12,'Customer','Gansha','+92654-6464646',3,'2017-06-22 01:27:47',3,'2017-06-22 01:27:47',1),(13,'Dealer','Tahir','+92879-7979797',3,'2017-06-22 02:03:36',3,'2017-06-22 02:03:36',1),(14,'Dealer','Saif','+92679-8797979',3,'2017-06-22 02:05:58',3,'2017-06-22 02:05:58',1),(15,'Dealer','Kashif','+92654-5646444',3,'2018-03-25 00:07:20',3,'2018-03-25 00:07:20',1);
+
+/*Table structure for table `employee` */
+
+DROP TABLE IF EXISTS `employee`;
+
+CREATE TABLE `employee` (
+  `employee_id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `cnic` varchar(15) default NULL,
+  `gender` varchar(255) default NULL,
+  `birth_date` datetime default NULL,
+  `home_address` varchar(255) default NULL,
+  `mobile_number` varchar(255) default NULL,
+  `photo_name` varchar(255) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `employee` */
+
+insert  into `employee`(`employee_id`,`name`,`cnic`,`gender`,`birth_date`,`home_address`,`mobile_number`,`photo_name`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (1,'farhan','41202','male','0000-00-00 00:00:00','hyd','03223142044',NULL,NULL,NULL,NULL,NULL,NULL);
+
+/*Table structure for table `module` */
+
+DROP TABLE IF EXISTS `module`;
+
+CREATE TABLE `module` (
+  `module_id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` timestamp NULL default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` timestamp NULL default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`module_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `module` */
+
+insert  into `module`(`module_id`,`name`,`description`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (1,'SYSTEM_SETUP','dashboard.faces',1,'2015-04-13 12:00:00',1,'2015-04-13 12:00:00',1),(2,'HUMAN_RESOURCE','human-resources-dashboard.faces',1,'2015-04-13 12:00:00',1,'2015-04-13 12:00:00',1),(3,'MOVABLE_ASSET','movable-asset-dashboard.faces',1,'2015-04-13 12:00:00',1,'2015-04-13 12:00:00',1),(4,'IMMOVABLE_ASSET','immovable-asset-dashboard.faces',1,'2015-04-13 12:00:00',1,'2015-04-13 12:00:00',1),(5,'LABELS','Labels',1,'2016-07-26 15:36:53',1,'2016-07-26 15:37:03',1),(6,'REPORTS','reports-dashboard.faces',1,'2016-07-26 15:38:40',1,'2016-07-26 15:38:46',1);
+
+/*Table structure for table `order` */
+
+DROP TABLE IF EXISTS `order`;
+
+CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL auto_increment,
+  `customer_id` int(11) default NULL,
+  `amount_paid` decimal(16,4) default NULL,
+  `comment` varchar(500) default NULL,
+  `time` datetime default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `order` */
+
+/*Table structure for table `order_details` */
+
+DROP TABLE IF EXISTS `order_details`;
+
+CREATE TABLE `order_details` (
+  `detail_id` int(11) NOT NULL auto_increment,
+  `order_no` int(11) default NULL,
+  `order_id` int(11) default NULL,
+  `product_id` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`detail_id`),
+  KEY `order_id` (`order_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
+  CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `order_details` */
+
+/*Table structure for table `permission` */
+
+DROP TABLE IF EXISTS `permission`;
+
+CREATE TABLE `permission` (
+  `permission_id` int(11) NOT NULL auto_increment,
+  `module_id` int(11) default NULL,
+  `permission_name` varchar(50) default NULL,
+  `screen_name` varchar(255) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` timestamp NULL default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` timestamp NULL default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`permission_id`),
+  KEY `module_id` (`module_id`),
+  CONSTRAINT `permission_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `module` (`module_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `permission` */
+
+insert  into `permission`(`permission_id`,`module_id`,`permission_name`,`screen_name`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (1,1,'VIEW_ROLE','search-role.faces',1,'2015-04-13 12:00:00',1,'2015-04-13 12:00:00',1);
+
+/*Table structure for table `product` */
+
+DROP TABLE IF EXISTS `product`;
+
+CREATE TABLE `product` (
+  `product_id` int(11) NOT NULL auto_increment,
+  `company_id` int(11) default NULL,
+  `name` varchar(255) default NULL,
+  `cost` decimal(16,4) default NULL,
+  `price` decimal(16,4) default NULL,
+  `quantity` int(11) default NULL,
+  `unit_id` int(11) default NULL,
+  `number` int(11) default NULL,
+  `expiry_date` datetime default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`product_id`),
+  KEY `company_id` (`company_id`),
+  KEY `unit_id` (`unit_id`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`),
+  CONSTRAINT `product_ibfk_2` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`unit_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `product` */
+
+insert  into `product`(`product_id`,`company_id`,`name`,`cost`,`price`,`quantity`,`unit_id`,`number`,`expiry_date`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (11,1,'1','1.0000','1.0000',1,1,1,'2018-03-06 14:50:37',1,'2017-05-01 15:20:56',1,'2017-05-01 15:20:56',1),(12,2,'1','1.0000','1.0000',1,1,1,'2018-03-20 12:45:07',1,'2017-05-01 15:22:20',3,'2018-03-25 12:44:38',0),(13,3,'1','1.0000','1.0000',1,1,1,'2018-03-25 13:10:46',1,'2017-05-01 15:27:55',3,'2018-03-25 13:10:46',1),(14,4,'7','1.0000','1.0000',1,1,1,'2018-03-14 12:45:14',1,'2017-05-01 15:54:56',3,'2018-03-25 12:44:22',0),(15,2,'1','1.0000','1.0000',1,5,1,'2018-03-28 06:59:47',1,'2017-05-01 15:58:41',3,'2018-03-28 06:59:47',1),(16,1,'sada','1.0000','1.0000',1,1,1,'2018-03-25 13:08:53',1,'2017-05-01 15:59:27',3,'2018-03-25 13:08:53',1),(17,1,'3','5.0000','3.0000',2,1,4,'2017-05-01 00:00:00',1,'2017-05-01 16:02:07',1,'2017-05-01 16:02:07',1),(18,1,'34','334.0000','44.0000',3,1,34,'2017-05-10 00:00:00',1,'2017-05-01 16:23:13',1,'2017-05-01 16:23:13',0),(19,2,'farhan','344.0000','32.0000',43,2,32,'2018-03-26 13:21:22',1,'2017-05-01 16:24:07',3,'2018-03-26 13:21:22',1),(20,3,'pakistan','434.0000','23.0000',32,2,22,'2018-03-14 14:51:03',1,'1970-01-01 05:00:00',1,'2018-03-30 14:51:09',1),(21,2,'fsdf','3434.0000','33.0000',54,1,3443,'2017-08-15 00:00:00',1,'2017-05-01 16:36:32',1,'2017-05-01 16:36:32',1),(22,3,'Sunslik','200.0000','2000.0000',10,3,1,'2018-03-25 13:49:54',3,'2018-03-25 13:49:30',3,'2018-03-25 13:49:30',1),(23,1,'One','2000.0000','100.0000',10,1,1,'2018-03-25 14:19:27',3,'2018-03-25 14:18:41',3,'2018-03-25 14:19:27',1),(24,3,'Head & Shoulder','20000.0000','200.0000',100,3,1,'2018-03-25 14:25:17',3,'2018-03-25 14:25:17',3,'2018-03-25 14:25:17',1),(25,3,'Kashif Alie','2000.0000','200.0000',20,4,2,'2018-03-28 07:00:34',3,'2018-03-28 07:00:34',3,'2018-03-28 07:00:34',1),(26,1,'Lifeboy','2000.0000','200.0000',12,1,2,'2018-03-28 07:02:01',3,'2018-03-28 07:02:01',3,'2018-03-28 07:02:01',1),(27,1,'Cocomo','2000.0000','20.0000',200,1,20,'2018-03-28 07:04:25',3,'2018-03-28 07:04:25',3,'2018-03-28 07:04:25',1),(28,1,'Q Mobile','21000.0000','12000.0000',12,1,12,'2018-03-28 07:07:28',3,'2018-03-28 07:07:28',3,'2018-03-28 07:07:28',1),(29,1,'Sambosa','2200.0000','1200.0000',12,1,12,'2018-03-28 07:08:51',3,'2018-03-28 07:08:51',3,'2018-03-28 07:08:51',1);
+
+/*Table structure for table `purchase` */
+
+DROP TABLE IF EXISTS `purchase`;
+
+CREATE TABLE `purchase` (
+  `purchase_id` int(11) NOT NULL auto_increment,
+  `comission` decimal(16,4) default NULL,
+  `comission_id` int(11) default NULL,
+  `comment` varchar(0) default NULL,
+  `date` datetime default NULL,
+  `purchase_no` int(11) default NULL,
+  `amount_paid` decimal(16,4) default NULL,
+  `comapany_id` int(11) default NULL,
+  `discount` decimal(16,4) default NULL,
+  `total` decimal(16,4) default NULL,
+  `dealer_id` int(255) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  PRIMARY KEY  (`purchase_id`),
+  KEY `comapany_id` (`comapany_id`),
+  KEY `dealer_id` (`dealer_id`),
+  KEY `created_by` (`created_by`),
+  KEY `modified_by` (`modified_by`),
+  CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`comapany_id`) REFERENCES `company` (`company_id`),
+  CONSTRAINT `purchase_ibfk_2` FOREIGN KEY (`dealer_id`) REFERENCES `customer` (`customer_id`),
+  CONSTRAINT `purchase_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `purchase_ibfk_4` FOREIGN KEY (`modified_by`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `purchase` */
+
+insert  into `purchase`(`purchase_id`,`comission`,`comission_id`,`comment`,`date`,`purchase_no`,`amount_paid`,`comapany_id`,`discount`,`total`,`dealer_id`,`created_by`,`created_date`,`modified_by`,`modified_date`) values (1,'10.0000',2,'','2017-06-20 02:21:16',1001,'200.0000',1,'10.0000','300.0000',1,3,'2017-06-20 16:02:38',3,'2017-06-20 16:03:17'),(2,'10.0000',2,'','2017-06-20 02:23:51',1002,'200.0000',1,'10.0000','800.0000',1,3,'2017-05-09 16:01:53',3,'2017-06-20 16:03:21'),(3,'10.0000',2,'','2017-06-20 12:52:02',1003,'12.0000',1,'10.0000','100.0000',1,3,'2017-06-20 16:02:09',3,'2017-06-20 16:03:24'),(4,'10.0000',2,'','2017-06-20 12:52:48',1004,'20.0000',1,'10.0000','100.0000',1,3,'2017-06-20 16:02:03',3,'2017-06-20 16:03:28'),(5,'10.0000',2,'','2017-06-20 12:56:24',1005,'200.0000',1,'10.0000','300.0000',1,3,'2017-06-20 16:02:25',3,'2017-06-20 16:03:26'),(6,'10.0000',2,'','2017-06-20 14:04:54',1006,'700.0000',1,'10.0000','1100.0000',1,3,'2017-06-20 16:02:27',3,'2017-06-20 16:03:31'),(7,'10.0000',2,'','2017-06-20 15:34:33',1007,'200.0000',1,'10.0000','800.0000',7,3,'2017-06-20 16:02:30',3,'2017-06-20 16:03:33'),(8,'10.0000',2,'','2017-06-20 15:54:31',1008,'300.0000',1,'10.0000','800.0000',7,3,'2017-06-20 16:02:32',3,'2017-06-20 16:03:38'),(9,'10.0000',2,'','2017-06-20 15:57:39',1009,'2000.0000',1,'10.0000','8668.0000',7,3,'2017-06-20 16:02:35',3,'2017-06-20 16:03:40'),(11,'10.0000',2,'','2017-06-20 16:04:25',1010,'30.0000',1,'10.0000','800.0000',7,3,'2017-06-20 16:05:11',3,'2017-06-20 16:05:18'),(12,'10.0000',2,'','2017-06-20 16:05:32',1011,'30.0000',1,'10.0000','800.0000',7,3,'2017-06-20 16:25:06',3,'2017-06-20 16:25:10'),(13,'10.0000',2,'','2017-06-20 16:08:59',1012,'3000.0000',1,'10.0000','8468.0000',7,3,'2017-06-20 16:08:59',3,'2017-06-20 16:08:59'),(14,'10.0000',2,'','2017-06-20 16:10:05',1013,'3000.0000',1,'10.0000','8968.0000',7,3,'2017-06-20 16:10:05',3,'2017-06-20 16:10:05'),(15,'10.0000',2,'','2017-06-20 20:59:24',1014,'20.0000',1,'10.0000','100.0000',7,3,'2017-06-20 20:59:24',3,'2017-06-20 20:59:24'),(16,'10.0000',2,'','2017-06-20 21:00:47',1015,'30.0000',1,'10.0000','100.0000',7,3,'2017-06-20 21:00:47',3,'2017-06-20 21:00:47'),(17,'10.0000',2,'','2017-06-21 01:18:23',1016,'20.0000',1,'10.0000','100.0000',7,3,'2017-06-21 01:18:23',3,'2017-06-21 01:18:23'),(18,'20.0000',3,'','2017-06-21 01:19:11',1017,'4000.0000',1,'10.0000','8668.0000',7,3,'2017-06-21 01:19:11',3,'2017-06-21 01:19:11'),(19,'10.0000',2,'','2017-06-21 04:53:29',1018,'80000.0000',1,'10.0000','95016.0000',7,3,'2017-06-21 04:53:29',3,'2017-06-21 04:53:29'),(20,'10.0000',2,'','2017-06-22 19:32:47',1019,'5000.0000',3,'5.0000','8568.0000',8,3,'2017-06-22 19:32:47',3,'2017-06-22 19:32:47');
+
+/*Table structure for table `purchase_detail` */
+
+DROP TABLE IF EXISTS `purchase_detail`;
+
+CREATE TABLE `purchase_detail` (
+  `purchase_detail_id` int(11) NOT NULL auto_increment,
+  `purchase_id` int(11) default NULL,
+  `product_id` int(11) default NULL,
+  `quantity` int(11) default NULL,
+  `commision` int(11) default NULL,
+  `discount` int(11) default NULL,
+  `rate` int(11) default NULL,
+  `unit_id` int(11) default NULL,
+  `commision_id` int(11) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(4) default NULL,
+  PRIMARY KEY  (`purchase_detail_id`),
+  KEY `product_id` (`product_id`),
+  KEY `unit_id` (`unit_id`),
+  KEY `commision_id` (`commision_id`),
+  KEY `purchase_id` (`purchase_id`),
+  KEY `created_by` (`created_by`),
+  KEY `modified_by` (`modified_by`),
+  CONSTRAINT `purchase_detail_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  CONSTRAINT `purchase_detail_ibfk_3` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`unit_id`),
+  CONSTRAINT `purchase_detail_ibfk_4` FOREIGN KEY (`commision_id`) REFERENCES `commision` (`commision_id`),
+  CONSTRAINT `purchase_detail_ibfk_5` FOREIGN KEY (`purchase_id`) REFERENCES `purchase` (`purchase_id`),
+  CONSTRAINT `purchase_detail_ibfk_6` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `purchase_detail_ibfk_7` FOREIGN KEY (`modified_by`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `purchase_detail` */
+
+insert  into `purchase_detail`(`purchase_detail_id`,`purchase_id`,`product_id`,`quantity`,`commision`,`discount`,`rate`,`unit_id`,`commision_id`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (3,5,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 12:56:24',3,'2017-06-20 12:56:24',1),(4,5,12,1,NULL,NULL,200,1,NULL,3,'2017-06-20 12:56:24',3,'2017-06-20 12:56:24',1),(5,6,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 14:04:54',3,'2017-06-20 14:04:54',1),(6,6,14,1,NULL,NULL,300,1,NULL,3,'2017-06-20 14:04:54',3,'2017-06-20 14:04:54',1),(7,6,12,1,NULL,NULL,200,1,NULL,3,'2017-06-20 14:04:54',3,'2017-06-20 14:04:54',1),(8,6,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 14:04:54',3,'2017-06-20 14:04:54',1),(9,7,12,1,NULL,NULL,200,1,NULL,3,'2017-06-20 15:34:33',3,'2017-06-20 15:34:33',1),(10,7,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 15:34:33',3,'2017-06-20 15:34:33',1),(11,7,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 15:34:33',3,'2017-06-20 15:34:33',1),(12,8,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 15:54:31',3,'2017-06-20 15:54:31',1),(13,8,12,1,NULL,NULL,200,1,NULL,3,'2017-06-20 15:54:31',3,'2017-06-20 15:54:31',1),(14,8,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 15:54:31',3,'2017-06-20 15:54:31',1),(15,9,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 15:57:39',3,'2017-06-20 15:57:39',1),(16,9,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 15:57:39',3,'2017-06-20 15:57:39',1),(17,9,12,1,NULL,NULL,200,1,NULL,3,'2017-06-20 15:57:39',3,'2017-06-20 15:57:39',1),(18,9,15,1,NULL,NULL,7868,1,NULL,3,'2017-06-20 15:57:39',3,'2017-06-20 15:57:39',1),(19,11,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 16:04:25',3,'2017-06-20 16:04:25',1),(20,11,12,1,NULL,NULL,200,1,NULL,3,'2017-06-20 16:04:25',3,'2017-06-20 16:04:25',1),(21,11,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 16:04:25',3,'2017-06-20 16:04:25',1),(22,12,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 16:05:32',3,'2017-06-20 16:05:32',1),(23,12,12,1,NULL,NULL,200,1,NULL,3,'2017-06-20 16:05:32',3,'2017-06-20 16:05:32',1),(24,12,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 16:05:32',3,'2017-06-20 16:05:32',1),(25,13,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 16:08:59',3,'2017-06-20 16:08:59',1),(26,13,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 16:08:59',3,'2017-06-20 16:08:59',1),(27,13,15,1,NULL,NULL,7868,1,NULL,3,'2017-06-20 16:08:59',3,'2017-06-20 16:08:59',1),(28,14,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 16:10:05',3,'2017-06-20 16:10:05',1),(29,14,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 16:10:05',3,'2017-06-20 16:10:05',1),(30,14,15,1,NULL,NULL,7868,1,NULL,3,'2017-06-20 16:10:05',3,'2017-06-20 16:10:05',1),(31,14,13,1,NULL,NULL,500,1,NULL,3,'2017-06-20 16:10:05',3,'2017-06-20 16:10:05',1),(32,15,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 20:59:24',3,'2017-06-20 20:59:24',1),(33,16,11,1,NULL,NULL,100,1,NULL,3,'2017-06-20 21:00:47',3,'2017-06-20 21:00:47',1),(34,17,11,1,NULL,NULL,100,1,NULL,3,'2017-06-21 01:18:23',3,'2017-06-21 01:18:23',1),(35,18,11,1,NULL,NULL,100,1,NULL,3,'2017-06-21 01:19:11',3,'2017-06-21 01:19:11',1),(36,18,12,1,NULL,NULL,200,1,NULL,3,'2017-06-21 01:19:11',3,'2017-06-21 01:19:11',1),(37,18,13,1,NULL,NULL,500,1,NULL,3,'2017-06-21 01:19:11',3,'2017-06-21 01:19:11',1),(38,18,15,1,NULL,NULL,7868,1,NULL,3,'2017-06-21 01:19:11',3,'2017-06-21 01:19:11',1),(39,19,11,1,NULL,NULL,100,1,NULL,3,'2017-06-21 04:53:29',3,'2017-06-21 04:53:29',1),(40,19,13,1,NULL,NULL,500,1,NULL,3,'2017-06-21 04:53:29',3,'2017-06-21 04:53:29',1),(41,19,15,12,NULL,NULL,7868,1,NULL,3,'2017-06-21 04:53:29',3,'2017-06-21 04:53:29',1),(42,20,12,1,NULL,NULL,200,2,NULL,3,'2017-06-22 19:32:47',3,'2017-06-22 19:32:47',1),(43,20,15,1,NULL,NULL,7868,1,NULL,3,'2017-06-22 19:32:47',3,'2017-06-22 19:32:47',1),(44,20,13,1,NULL,NULL,500,1,NULL,3,'2017-06-22 19:32:47',3,'2017-06-22 19:32:47',1);
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `role_id` int(11) NOT NULL auto_increment,
+  `role_name` varchar(50) default NULL,
+  `description` varchar(256) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` timestamp NULL default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` timestamp NULL default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `role` */
+
+insert  into `role`(`role_id`,`role_name`,`description`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (1,'Secretary','Minimum sets of rights to view over all system ',1,'2015-04-13 12:00:00',2,'2017-04-11 11:44:21',1),(2,'Deputy Secretary Admin','Grant rights to perform all tasks of Human Resource Module',1,'2015-06-11 08:48:55',2,'2016-07-29 15:19:45',1),(5,'Officer','work and services',1,'2015-07-03 14:56:44',1,'2015-07-03 14:58:02',0),(7,'Director Building','Grant Rights To Perform All Tasks of Building Module',1,'2015-07-06 10:27:33',1,'2015-07-27 14:33:56',1),(9,'Deputy Director (P.M & E.Cell)','Grant rights to perform all tasks of roads module',1,'2015-07-27 14:04:51',1,'2015-08-20 16:05:24',1),(10,'IT Assitant','IT Assitant',1,'2015-11-17 15:11:50',1,'2015-11-17 15:11:50',1),(13,'Computer Programmer','Dummy Role',2,'2016-11-25 03:09:48',2,'2016-11-25 03:09:48',1),(14,'Computer Admin','abc',27,'2016-11-25 03:20:51',27,'2016-11-25 03:22:19',1);
+
+/*Table structure for table `role_module` */
+
+DROP TABLE IF EXISTS `role_module`;
+
+CREATE TABLE `role_module` (
+  `role_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  PRIMARY KEY  (`role_id`,`module_id`),
+  KEY `FK_designation_module_module` (`module_id`),
+  CONSTRAINT `FK_designation_module_module` FOREIGN KEY (`module_id`) REFERENCES `module` (`module_id`),
+  CONSTRAINT `role_module_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `role_module` */
+
+/*Table structure for table `role_permissions` */
+
+DROP TABLE IF EXISTS `role_permissions`;
+
+CREATE TABLE `role_permissions` (
+  `role_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY  (`role_id`,`permission_id`),
+  KEY `FK_role_permissions_2` (`role_id`),
+  KEY `FK_role_permissions1` (`permission_id`),
+  CONSTRAINT `FK_role_permissions1` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`permission_id`),
+  CONSTRAINT `role_permissions_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `role_permissions` */
+
+/*Table structure for table `unit` */
+
+DROP TABLE IF EXISTS `unit`;
+
+CREATE TABLE `unit` (
+  `unit_id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(4) default NULL,
+  PRIMARY KEY  (`unit_id`),
+  KEY `created_by` (`created_by`),
+  KEY `modified_by` (`modified_by`),
+  CONSTRAINT `unit_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `unit_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `unit` */
+
+insert  into `unit`(`unit_id`,`name`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (1,'200ml',3,'2017-06-04 01:39:24',3,'2017-06-21 05:05:40',1),(2,'600ml',3,'2017-06-04 01:39:41',3,'2017-06-17 03:22:00',1),(3,'251ml',3,'2017-06-14 01:30:43',3,'2018-03-26 09:00:18',1),(4,'550ml',3,'2017-06-17 02:09:33',3,'2017-06-17 02:09:33',1),(5,'960ml',3,'2017-06-17 02:12:24',3,'2017-06-17 03:21:35',1),(6,'750ml',3,'2017-06-17 02:37:30',3,'2017-06-17 02:43:17',1),(7,'1500ml',3,'2017-06-17 03:22:34',3,'2017-06-17 03:22:34',1),(8,'900ml',3,'2017-06-21 05:05:58',3,'2017-06-21 05:05:58',1),(9,'110ml',3,'2017-06-21 23:56:35',3,'2017-06-22 00:53:27',1),(10,'850ml',3,'2017-06-22 00:12:24',3,'2017-06-22 00:12:24',1),(11,'630ml',3,'2017-06-22 00:14:54',3,'2017-06-22 00:14:54',1),(12,'530ml',3,'2018-03-26 08:39:59',3,'2018-03-26 08:39:59',1),(13,'533ml',3,'2018-03-26 09:00:29',3,'2018-03-26 09:00:29',1);
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL auto_increment,
+  `role_id` int(11) default NULL,
+  `employee_id` int(11) default NULL,
+  `name` varchar(255) character set latin1 collate latin1_general_cs default NULL,
+  `password` varchar(255) default NULL,
+  `password_modified_date` timestamp NULL default NULL,
+  `created_by` int(11) default NULL,
+  `created_date` datetime default NULL,
+  `modified_by` int(11) default NULL,
+  `modified_date` datetime default NULL,
+  `active` tinyint(1) default NULL,
+  PRIMARY KEY  (`user_id`),
+  KEY `employee_id` (`employee_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`),
+  CONSTRAINT `user_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `user` */
+
+insert  into `user`(`user_id`,`role_id`,`employee_id`,`name`,`password`,`password_modified_date`,`created_by`,`created_date`,`modified_by`,`modified_date`,`active`) values (3,10,1,'admin','admin',NULL,NULL,NULL,NULL,NULL,1),(7,10,1,'dil','123',NULL,NULL,NULL,NULL,NULL,0);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
